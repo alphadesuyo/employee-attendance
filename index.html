@@ -249,11 +249,11 @@
                 return;
             }
 
-            fetch('https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/', {
+            fetch('https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/api/clock-in', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                employee_name: employeeName,
+               employee_name: employeeName,
                 client_name: clientName
               })
             })
@@ -286,14 +286,14 @@
                 return;
             }
 
-            fetch('https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/', {
-             method: 'POST',
-             headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify({
-               employee_name: employeeName,
-               client_name: clientName
-             })
-           })
+            fetch('https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/api/clock-out', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                employee_name: employeeName,
+                client_name: clientName
+              })
+            })
             .then(response => response.json())
             .then(data => {
                 document.getElementById('message').textContent = data.message;
