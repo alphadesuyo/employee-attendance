@@ -249,14 +249,15 @@
                 return;
             }
 
-            fetch('/api/clock-in', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    employee_name: employeeName,
-                    client_name: clientName
-                })
+            fetch('https://attendance-backend.onrender.com/api/clock-in', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                employee_name: employeeName,
+                client_name: clientName
+              })
             })
+
             .then(response => response.json())
             .then(data => {
                 document.getElementById('message').textContent = data.message;
@@ -285,14 +286,14 @@
                 return;
             }
 
-            fetch('/api/clock-out', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    employee_name: employeeName,
-                    client_name: clientName
-                })
-            })
+            fetch('https://attendance-backend.onrender.com/api/clock-out', {
+             method: 'POST',
+             headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+               employee_name: employeeName,
+               client_name: clientName
+             })
+           })
             .then(response => response.json())
             .then(data => {
                 document.getElementById('message').textContent = data.message;
