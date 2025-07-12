@@ -93,7 +93,9 @@
 
         .button-group {
             display: flex;
-            gap: 30px;
+            flex-wrap: wrap;         /* 改行OKにする */
+            justify-content: center; /* 中央寄せ */
+            gap: 16px;               /* ボタン間の間隔 */
             margin-bottom: 30px;
         }
 
@@ -107,8 +109,12 @@
             cursor: pointer;
             border-radius: 8px;
             transition: all 0.3s ease;
-            min-width: 150px;
+            min-width: 120px;
+            flex: 1 1 40%;  /* スマホ対応で2列に折り返しやすく */
+            max-width: 200px;
+            box-sizing: border-box;
         }
+
 
         .attendance-btn:hover {
             background-color: #333;
@@ -211,6 +217,7 @@
             <button class="attendance-btn" id="clockOutBtn" onclick="clockOut()">退勤</button>
             <input type="number" id="overtimeHours" placeholder="残業時間 (例: 1.5)" step="0.5" min="0">
             <button class="attendance-btn" onclick="requestOvertime()">残業申請</button>
+            <input type="text" id="memo" placeholder="メモ（現場名など）">
         </div>
 
         <div class="status-info" id="statusInfo" style="display: none;">
@@ -243,6 +250,8 @@
         setInterval(updateTime, 1000);
         updateTime();
 
+        const memo = document.getElementById('memo').value;
+
         // 出勤処理
         function clockIn() {
             const employeeName = document.getElementById('employeeName').value;
@@ -258,7 +267,8 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                employee_name: employeeName,
-                client_name: clientName
+                client_name: clientName,
+                memo: memo
               })
             })
 
