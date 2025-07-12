@@ -235,8 +235,8 @@
         <div class="button-group">
             <button class="attendance-btn" id="clockInBtn" onclick="clockIn()">出勤</button>
             <button class="attendance-btn" id="clockOutBtn" onclick="clockOut()">退勤</button>
-            <input type="number" id="overtimeHours" placeholder="残業時間 (例: 1.5)" step="0.5" min="0">
             <button class="attendance-btn" onclick="requestOvertime()">残業申請</button>
+            <input type="number" id="overtimeHours" placeholder="残業時間 (例: 1.5)" step="0.5" min="0">
             <input type="text" id="memo" placeholder="メモ（現場名など）">
         </div>
 
@@ -270,12 +270,11 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        const memo = document.getElementById('memo').value;
-
         // 出勤処理
         function clockIn() {
             const employeeName = document.getElementById('employeeName').value;
             const clientName = document.getElementById('clientName').value;
+            const memo = document.getElementById('memo').value;
 
             if (!employeeName || !clientName) {
                 alert('従業員名と取引先を選択してください。');
@@ -314,6 +313,7 @@
         function clockOut() {
             const employeeName = document.getElementById('employeeName').value;
             const clientName = document.getElementById('clientName').value;
+            const memo = document.getElementById('memo').value;
 
             if (!employeeName || !clientName) {
                 alert('従業員名と取引先を選択してください。');
@@ -325,7 +325,8 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
                 employee_name: employeeName,
-                client_name: clientName
+                client_name: clientName,
+                memo: memo
               })
             })
             .then(response => response.json())
@@ -350,6 +351,7 @@
             const employeeName = document.getElementById('employeeName').value;
             const clientName = document.getElementById('clientName').value;
             const hours = parseFloat(document.getElementById('overtimeHours').value);
+            const memo = document.getElementById('memo').value;
 
             if (!employeeName || !clientName || isNaN(hours) || hours <= 0) {
                 alert('従業員名・取引先・残業時間を正しく入力してください。');
@@ -362,7 +364,8 @@
                 body: JSON.stringify({
                     employee_name: employeeName,
                     client_name: clientName,
-                    overtime_hours: hours
+                    overtime_hours: hours,
+                    memo: memo
                 })
             })
             .then(res => res.json())
