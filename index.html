@@ -202,13 +202,17 @@
         <div class="current-time" id="currentTime">00:00:00</div>
         <div class="current-date" id="currentDate">2025年7月12日</div>
         
+        <!-- メッセージを上に移動 -->
+        <div class="message" id="message"></div>
+
+        <!-- ボタンを横並びでまとめる -->
         <div class="button-group">
             <button class="attendance-btn" id="clockInBtn" onclick="clockIn()">出勤</button>
             <button class="attendance-btn" id="clockOutBtn" onclick="clockOut()">退勤</button>
+            <input type="number" id="overtimeHours" placeholder="残業時間 (例: 1.5)" step="0.5" min="0">
+            <button class="attendance-btn" onclick="requestOvertime()">残業申請</button>
         </div>
-        
-        <div class="message" id="message"></div>
-        
+
         <div class="status-info" id="statusInfo" style="display: none;">
             <h3>記録情報</h3>
             <p id="recordInfo"></p>
@@ -312,6 +316,35 @@
             });
         }
 
+        function requestOvertime() {
+            const employeeName = document.getElementById('employeeName').value;
+            const clientName = document.getElementById('clientName').value;
+            const hours = parseFloat(document.getElementById('overtimeHours').value);
+
+            if (!employeeName || !clientName || isNaN(hours) || hours <= 0) {
+                alert('従業員名・取引先・残業時間を正しく入力してください。');
+                return;
+            }
+
+            fetch('https://あなたのURL/api/overtime-request', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    employee_name: employeeName,
+                    client_name: clientName,
+                    overtime_hours: hours
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('message').textContent = data.message || '残業申請を受け付けました。';
+                setTimeout(() => document.getElementById('message').textContent = '', 3000);
+            })
+            .catch(err => {
+                console.error('残業申請エラー:', err);
+                alert('残業申請に失敗しました。');
+            });
+        }
     </script>
 </body>
 </html>
