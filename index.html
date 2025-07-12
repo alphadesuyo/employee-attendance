@@ -196,6 +196,7 @@
 
             .button-group input[type="number"],
             .button-group input[type="text"] {
+                width: 100%;
                 padding: 20px 40px;
                 font-size: 18px;
                 font-weight: bold;
@@ -204,13 +205,9 @@
                 color: #333;
                 border-radius: 8px;
                 transition: all 0.3s ease;
-                min-width: 120px;
-                flex: 1 1 40%;
-                max-width: 200px;
                 box-sizing: border-box;
+                max-width: 300px;  /* ← PC時のバランスのために制限（任意） */
             }
-
-
 
             .current-time {
                 font-size: 36px;
