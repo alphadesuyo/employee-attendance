@@ -337,7 +337,7 @@
         }
 
         function login() {
-            fetch(`https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/api/login`, {
+            fetch(`${BASE_URL}/api/login`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -362,7 +362,7 @@
             const clientName = document.getElementById('clientName').value;
             const memo = document.getElementById('memo').value;
 
-            fetch(`https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/api/clock-in`, {
+            fetch(`${BASE_URL}/api/clock-in`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -382,7 +382,7 @@
             const clientName = document.getElementById('clientName').value;
             const memo = document.getElementById('memo').value;
 
-            fetch(`https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/api/clock-out`, {
+            fetch(`${BASE_URL}/api/clock-out`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
@@ -408,7 +408,7 @@
                 return;
             }
 
-            fetch(`https://1c575df0-ec53-4ff0-acc4-786dd52cdf83-00-3nn30g42p0nfd.spock.replit.dev/api/overtime-request`, {
+            fetch(`${BASE_URL}/api/overtime-request`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
