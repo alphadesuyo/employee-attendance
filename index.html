@@ -324,6 +324,7 @@
         function register() {
             fetch(`${BASE_URL}/api/register`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     name: document.getElementById('registerName').value,
