@@ -427,7 +427,9 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            fetch(`${BASE_URL}/api/me`)
+            fetch(`${BASE_URL}/api/me`, {
+                credentials: 'include'
+            })
                 .then(res => {
                     if (!res.ok) throw new Error();
                     return res.json();
